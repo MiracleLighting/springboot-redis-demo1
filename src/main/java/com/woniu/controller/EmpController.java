@@ -44,6 +44,8 @@ public class EmpController {
     @CachePut(cacheNames = "emp", key = "#emp.empname")
     public Result empInsert(Emp emp) {
         System.out.println("EmpController.empInsert");
+        System.out.println("Dream It Possible");
+
         int i = empService.insert(emp);
         return new Result(ResultCode.SUCCESS,i);
     }
@@ -53,7 +55,6 @@ public class EmpController {
     @CacheEvict(cacheNames = "emp", allEntries = true)
     public Result empUpdateById(Emp emp) {
         System.out.println("EmpController.empUpdateById");
-
         System.out.println("test Git");
         System.out.println("test Git2");
         System.out.println("test Git3");
