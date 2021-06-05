@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.woniu.dao.EmpDao">
+  <resultMap id="BaseResultMap" type="com.woniu.entity.Emp">
+    <id column="empid" jdbcType="INTEGER" property="empid" />
+    <result column="empname" jdbcType="VARCHAR" property="empname" />
+    <result column="empsex" jdbcType="CHAR" property="empsex" />
+    <result column="empage" jdbcType="INTEGER" property="empage" />
+    <result column="empphone" jdbcType="VARCHAR" property="empphone" />
+    <result column="empaddress" jdbcType="VARCHAR" property="empaddress" />
+    <result column="empdate" jdbcType="TIMESTAMP" property="empdate" />
+    <result column="deptid" jdbcType="INTEGER" property="deptid" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    empid, empname, empsex, empage, empphone, empaddress, empdate, deptid
+  </sql>
+  <select id="selectByExample" parameterType="com.woniu.entity.EmpExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from emp
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from emp
+    where empid = #{empid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from emp
+    where empid = #{empid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.woniu.entity.EmpExample">
+    delete from emp
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="empid" keyProperty="empid" parameterType="com.woniu.entity.Emp" useGeneratedKeys="true">
+    insert into emp (empname, empsex, empage, 
+      empphone, empaddress, empdate, 
+      deptid)
+    values (#{empname,jdbcType=VARCHAR}, #{empsex,jdbcType=CHAR}, #{empage,jdbcType=INTEGER}, 
+      #{empphone,jdbcType=VARCHAR}, #{empaddress,jdbcType=VARCHAR}, #{empdate,jdbcType=TIMESTAMP}, 
+      #{deptid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="empid" keyProperty="empid" parameterType="com.woniu.entity.Emp" useGeneratedKeys="true">
+    insert into emp
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="empname != null">
+        empname,
+      </if>
+      <if test="empsex != null">
+        empsex,
+      </if>
+      <if test="empage != null">
+        empage,
+      </if>
+      <if test="empphone != null">
+        empphone,
+      </if>
+      <if test="empaddress != null">
+        empaddress,
+      </if>
+      <if test="empdate != null">
+        empdate,
+      </if>
+      <if test="deptid != null">
+        deptid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="empname != null">
+        #{empname,jdbcType=VARCHAR},
+      </if>
+      <if test="empsex != null">
+        #{empsex,jdbcType=CHAR},
+      </if>
+      <if test="empage != null">
+        #{empage,jdbcType=INTEGER},
+      </if>
+      <if test="empphone != null">
+        #{empphone,jdbcType=VARCHAR},
+      </if>
+      <if test="empaddress != null">
+        #{empaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="empdate != null">
+        #{empdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deptid != null">
+        #{deptid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.woniu.entity.EmpExample" resultType="java.lang.Long">
+    select count(*) from emp
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update emp
+    <set>
+      <if test="record.empid != null">
+        empid = #{record.empid,jdbcType=INTEGER},
+      </if>
+      <if test="record.empname != null">
+        empname = #{record.empname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.empsex != null">
+        empsex = #{record.empsex,jdbcType=CHAR},
+      </if>
+      <if test="record.empage != null">
+        empage = #{record.empage,jdbcType=INTEGER},
+      </if>
+      <if test="record.empphone != null">
+        empphone = #{record.empphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.empaddress != null">
+        empaddress = #{record.empaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.empdate != null">
+        empdate = #{record.empdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deptid != null">
+        deptid = #{record.deptid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update emp
+    set empid = #{record.empid,jdbcType=INTEGER},
+      empname = #{record.empname,jdbcType=VARCHAR},
+      empsex = #{record.empsex,jdbcType=CHAR},
+      empage = #{record.empage,jdbcType=INTEGER},
+      empphone = #{record.empphone,jdbcType=VARCHAR},
+      empaddress = #{record.empaddress,jdbcType=VARCHAR},
+      empdate = #{record.empdate,jdbcType=TIMESTAMP},
+      deptid = #{record.deptid,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.woniu.entity.Emp">
+    update emp
+    <set>
+      <if test="empname != null">
+        empname = #{empname,jdbcType=VARCHAR},
+      </if>
+      <if test="empsex != null">
+        empsex = #{empsex,jdbcType=CHAR},
+      </if>
+      <if test="empage != null">
+        empage = #{empage,jdbcType=INTEGER},
+      </if>
+      <if test="empphone != null">
+        empphone = #{empphone,jdbcType=VARCHAR},
+      </if>
+      <if test="empaddress != null">
+        empaddress = #{empaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="empdate != null">
+        empdate = #{empdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deptid != null">
+        deptid = #{deptid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where empid = #{empid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.woniu.entity.Emp">
+    update emp
+    set empname = #{empname,jdbcType=VARCHAR},
+      empsex = #{empsex,jdbcType=CHAR},
+      empage = #{empage,jdbcType=INTEGER},
+      empphone = #{empphone,jdbcType=VARCHAR},
+      empaddress = #{empaddress,jdbcType=VARCHAR},
+      empdate = #{empdate,jdbcType=TIMESTAMP},
+      deptid = #{deptid,jdbcType=INTEGER}
+    where empid = #{empid,jdbcType=INTEGER}
+  </update>
+</mapper>

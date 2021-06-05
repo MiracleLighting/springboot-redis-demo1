@@ -1,0 +1,35 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /SpringCache
+    encoding:
+      charset: UTF-8
+      force: true
+      enabled: true
+
+spring:
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: -1ms
+        min-idle: 0
+        max-idle: 8
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/daotest?serverTimezone=Asia/Shanghai
+    username: root
+    password: asd3272790
+  cache:
+    type: redis
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+logging:
+  level:
+    com:
+      woniu:
+        dao: debug
