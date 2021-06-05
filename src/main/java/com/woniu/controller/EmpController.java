@@ -59,6 +59,7 @@ public class EmpController {
         System.out.println("test Git3");
         System.out.println("master");
         System.out.println("hot-fix2");
+        System.out.println("天道酬勤");
 
 
         int i = empService.updateById(emp);
