@@ -53,6 +53,9 @@ public class EmpController {
     @CacheEvict(cacheNames = "emp", allEntries = true)
     public Result empUpdateById(Emp emp) {
         System.out.println("EmpController.empUpdateById");
+
+        System.out.println("test Git");
+
         int i = empService.updateById(emp);
         return new Result(ResultCode.SUCCESS,i);
     }
