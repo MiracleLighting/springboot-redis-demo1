@@ -57,10 +57,10 @@ public class EmpController {
         System.out.println("test Git");
         System.out.println("test Git2");
         System.out.println("test Git3");
+        System.out.println("合抱之木，生于毫末");
         System.out.println("master");
         System.out.println("hot-fix2");
         System.out.println("天道酬勤");
-
 
         int i = empService.updateById(emp);
         return new Result(ResultCode.SUCCESS,i);
