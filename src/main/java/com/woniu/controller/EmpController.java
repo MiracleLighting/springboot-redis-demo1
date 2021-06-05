@@ -35,6 +35,7 @@ public class EmpController {
     @Cacheable(cacheNames = "emp", key = "#empid") //empById::1
     public Result empQueryById(Integer empid) {
         System.out.println("EmpController.empQueryById");
+        System.out.println("九层之台，起于垒土");
         Emp emp = empService.findById(empid);
         return new Result(ResultCode.SUCCESS,emp);
     }
