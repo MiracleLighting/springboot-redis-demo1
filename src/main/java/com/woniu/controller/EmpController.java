@@ -55,6 +55,7 @@ public class EmpController {
         System.out.println("EmpController.empUpdateById");
 
         System.out.println("test Git");
+        System.out.println("test Git2");
 
         int i = empService.updateById(emp);
         return new Result(ResultCode.SUCCESS,i);
